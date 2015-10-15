@@ -1,0 +1,11 @@
+*.o
+.*.swp
+.*.swo
+*.pyc
+*.class
+
+*.dump
+
+Cargo.lock
+
+target/*
