@@ -4,5 +4,5 @@ version = "0.1.0"
 authors = ["daiver <ra22341@ya.ru>"]
 
 [dependencies.rustonum]
-path = "../../../rustonum"
+git = "https://github.com/daiver/rustonum"
 
