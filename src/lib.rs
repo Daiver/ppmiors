@@ -6,7 +6,7 @@ use std::io::prelude::*;
 
 use rustonum::MatrixXf;
 
-pub fn save_ppm_p2(mat : &MatrixXf, fname: &str)
+pub fn write_ppm_p2(mat : &MatrixXf, fname: &str)
 {
     let mut f = File::create(fname).unwrap();
     f.write_all(b"P2\n").unwrap();
@@ -20,12 +20,14 @@ pub fn save_ppm_p2(mat : &MatrixXf, fname: &str)
     }
 }
 
-pub fn save_ppm_p3(
-    mat_r : &MatrixXf, 
-    mat_g : &MatrixXf, 
-    mat_b : &MatrixXf, 
+//should be rewrited
+pub fn write_ppm_p3(
+    mat : &[MatrixXf; 3],
     fname: &str)
 {
+    let mat_r = &mat[0];
+    let mat_g = &mat[1];
+    let mat_b = &mat[2];
     assert!(mat_r.cols() == mat_b.cols() && mat_r.cols() == mat_g.cols());
     assert!(mat_r.rows() == mat_b.rows() && mat_r.rows() == mat_g.rows());
     let mut f = File::create(fname).unwrap();
@@ -41,7 +43,7 @@ pub fn save_ppm_p3(
     }
 }
 
-pub fn save_ppm_p5(
+pub fn write_ppm_p5(
     mat : &MatrixXf, 
     fname: &str)
 {
@@ -52,12 +54,14 @@ pub fn save_ppm_p5(
     f.write_all(&data_to_write).unwrap();
 }
 
-pub fn save_ppm_p6(
-    mat_r : &MatrixXf, 
-    mat_g : &MatrixXf, 
-    mat_b : &MatrixXf, 
-    fname: &str)
+pub fn write_ppm_p6(
+    mat : &[MatrixXf; 3],
+    fname: &str) 
 {
+    let mat_r = &mat[0];
+    let mat_g = &mat[1];
+    let mat_b = &mat[2];
+
     assert!(mat_r.cols() == mat_b.cols() && mat_r.cols() == mat_g.cols());
     assert!(mat_r.rows() == mat_b.rows() && mat_r.rows() == mat_g.rows());
     let mut f = File::create(fname).unwrap();
