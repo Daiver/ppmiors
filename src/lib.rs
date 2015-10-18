@@ -20,6 +20,28 @@ pub fn save_ppm_p2(mat : &MatrixXf, fname: &str)
     }
 }
 
+pub fn save_ppm_p3(
+    mat_r : &MatrixXf, 
+    mat_g : &MatrixXf, 
+    mat_b : &MatrixXf, 
+    fname: &str)
+{
+    assert!(mat_r.cols() == mat_b.cols() && mat_r.cols() == mat_g.cols());
+    assert!(mat_r.rows() == mat_b.rows() && mat_r.rows() == mat_g.rows());
+    let mut f = File::create(fname).unwrap();
+    f.write_all(b"P3\n").unwrap();
+    f.write_all(format!("{} {}\n255\n", mat_r.cols(), mat_r.rows()).as_bytes()).unwrap();
+    let values = mat_r.values().iter().zip(mat_g.values().iter()).zip(mat_b.values().iter());
+    for line_num in (0..mat_r.rows()){
+        let line = values.clone().skip(line_num * mat_r.cols()).take(mat_r.cols())
+            .map(| ((&r, &g), &b) | format!("{} {} {}", r as u8, g as u8, b as u8))
+            .collect::<Vec<_>>().join(" ");
+        f.write_all(line.as_bytes()).unwrap();
+        f.write_all(b"\n").unwrap();
+    }
+}
+
+
 
 pub fn read_ppm_p5(fname: &str) -> MatrixXf 
 {
