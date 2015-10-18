@@ -1,6 +1,6 @@
 [package]
 name = "ppmiors"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["daiver <ra22341@ya.ru>"]
 
 [dependencies.rustonum]
