@@ -41,6 +41,17 @@ pub fn save_ppm_p3(
     }
 }
 
+pub fn save_ppm_p5(
+    mat : &MatrixXf, 
+    fname: &str)
+{
+    let mut f = File::create(fname).unwrap();
+    f.write_all(b"P5\n").unwrap();
+    f.write_all(format!("{} {}\n255\n", mat.cols(), mat.rows()).as_bytes()).unwrap();
+    let data_to_write: Vec<u8> = mat.values().iter().map(|&x| x as u8).collect::<Vec<_>>();
+    f.write_all(&data_to_write).unwrap();
+}
+
 pub fn save_ppm_p6(
     mat_r : &MatrixXf, 
     mat_g : &MatrixXf, 
