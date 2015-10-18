@@ -1,4 +1,7 @@
+#[macro_use] extern crate rustonum;
 extern crate ppmiors;
+
+use rustonum::MatrixXf;
 
 fn main()
 {
